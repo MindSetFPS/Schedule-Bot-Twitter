@@ -1,0 +1,165 @@
+{% extends "dash.html" %}
+{% block create %}
+<section id="app" > 
+        <h1 class="title " >
+
+            Crear nuevo torneo
+          <!--    Welcome, {{ name }} -->
+        </h1>
+        <form method="POST" action="/create" >
+            <div class="px-6" >
+
+                <div class="columns is-flex is-align-items-center " >
+
+                    <div class="column is-one-third " >
+                        <h1 class="title">Juego</h1>
+                    </div>
+
+                    <div class="column" >
+                        {% for game in games %}
+                            <label class="radio">
+                                <span class="tag is-link is-light is-medium">
+                                    {{game}}
+                                    <input type="radio" name="game" value="{{game}}" >       
+                                </span>
+                            </label>
+                        {% endfor %}
+                    </div>
+
+                </div>
+
+                <div class="columns mt-2" >
+                    <div class="column is-one-third" >
+                        <p class="title is-large" >Nombre del torneo o liga</p>
+                    </div>
+                    <div class="column is-half" >
+                        <input class="input" type="text" placeholder="Nombre del torneo" name="tournamentName" >
+                    </div>
+                </div>
+                <div class="is-flex is-align-items-center columns	" >
+                    <div class="column is-one-third ">
+                        <h1 class="title">Duracion del torneo</h1>
+                    </div>
+
+                    <div class="is-one-fifth column" >
+                        <input class="input" type="number" placeholder="semanas" />
+                    </div>
+
+                    <p>Semanas</p>
+                </div>
+
+                <div class="is-flex is-align-items-center columns  " >
+                    <div class="column is-one-third " >
+                        <h1 class="title" >Dias de juego</h1>
+                    </div>
+                    <div class="column" > 
+                        {% set days = ['Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado', 'Domingo'] %}
+
+                        {% for day in days %}
+
+                        <div class="tag is-link is-light is-medium" >
+                            <input type="checkbox" name="days" value="{{day}}" v-model="gameDays" >       
+                            <label for="{{day}}">{{day}}</label>
+
+                        </div>
+
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <div class="is-flex columns" >
+                    <div class="column is-one-third" >
+                        <h1 class="title" >Horario de juegos</h1>
+                    </div>
+                    <div class="column is-flex is-align-items-center" >
+                        <div>
+                            <span>
+                                <input type="radio" name="gameHour" id="myValue" value="same" v-model="hourRepetition" >
+                                <label>Todos los dias se juegan a la misma hora</label>
+                            </span>
+                            <span>
+                                <input type="radio" name="gameHour" id="" value="unique" v-model="hourRepetition" >
+                                <label for="">Seleccionar horarios individualmente</label>
+                            </span>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="is-flex columns" v-if="hourRepetition == 'unique'" >
+                    <div class="column is-one-third" >
+                        <h1 class="title" >Seleciona la hora </h1>
+                    </div>
+                    <div class="column is-flex is-align-items-center" >
+                        <div>
+                            seleccion el horario de cada juego
+
+                            <div class="" > 
+                                <!--raw tag so that jinja ignores thee  and vue works with it-->
+                                {% raw %} 
+                                <div v-for="(day, index) in gameDays" :key="index"  >
+                                    
+                                    <div class="tag is-link is-light is-medium mt-5 is-flex columns      " >
+                                        <label class="column" v-bind:for="day" > 
+                                            {{ day }}
+                                        </label>
+                                        <div class="column" >
+                                            <input type="time" v-bind:name="day" id="">
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                                {% endraw %}
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="is-flex is-justify-content-center" >
+                    <div class="mx-1 " >
+                        <input class="button is-danger" type="button" value="Cancelar">
+                    </div>
+                    <div class="mx-1" > 
+                        <input class="button is-success" type="submit" value="Enviar">
+                    </div>
+
+                </div>
+            </div>
+                
+        </form>
+        
+        <button>
+            <a href="/logout" >
+                Cerrar Sesion
+            </a>
+        </button>
+</section>
+
+{% endblock %}
+
+{% block script %}
+<script>
+    console.log('Block script')
+    var app = new Vue({
+        el: '#app',
+        data: {
+            selectedDate: null,
+            hourRepetition: '',
+            gameDays: [],
+            uwu: 'chinguen a su madre traidores',
+            0: new Date(),
+            1: new Date(),
+            Miercoles: '',
+            Jueves: '',
+            Viernes: '',
+            Sabado: '',
+            Domingo: '',
+            mode: 'time',
+            timezone: ''
+
+        }
+    })
+</script>
+{% endblock %}

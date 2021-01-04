@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+<!--Hero -->
+<section class="hero is-medium is-warning ">
+    <div class="hero-body">
+      <div class="container">
+        <h1 class="title is-1">
+            Crear Cuenta
+        </h1>
+      </div>
+    </div>
+  </section>
+
+<!--Sign Up-->
+<div class="column is-offset-one-quarter is-half" >
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <div class="notification is-danger">
+            {{ messages[0] }}. Go to <a href="{{ url_for('auth.login') }}">login page</a>.
+        </div>
+    {% endif %}
+    {% endwith %}
+    <form method="POST" action="/signup" >   
+        <div class="field">
+            <p class="control has-icons-left has-icons-right">
+            <input class="input" type="email" placeholder="Email" name="email">
+            <span class="icon is-small is-left">
+                <i class="fas fa-envelope"></i>
+            </span>
+            <span class="icon is-small is-right">
+                <i class="fas fa-check"></i>
+            </span>
+            </p>
+        </div>
+        <div class="field">
+            <p class="control has-icons-left has-icons-right">
+            <input class="input" type="text" placeholder="Name" name="name">
+            <span class="icon is-small is-left">
+                <i class="fas fa-envelope"></i>
+            </span>
+            <span class="icon is-small is-right">
+                <i class="fas fa-check"></i>
+            </span>
+            </p>
+        </div>
+        <div class="field">
+            <p class="control has-icons-left">
+            <input class="input" type="password" placeholder="Password" name="password">
+            <span class="icon is-small is-left">
+                <i class="fas fa-lock"></i>
+            </span>
+            </p>
+        </div>
+        <div class="field ">
+            <p class="control">
+            <button class="button is-success is-large">
+                Login
+            </button>
+            </p>
+        </div>
+    </form>
+</div>
+{% endblock %}
