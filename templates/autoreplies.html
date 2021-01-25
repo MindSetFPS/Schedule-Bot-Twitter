@@ -4,4 +4,41 @@
 
 <h1 class="title"> Respuestas Automaticas</h1>
 
+<section>
+    <form method="POST" action="/autoreplies" class="is-flex is-align-items-center ">
+        <div class="mx-2" >
+            <label for=""><h2>Disparador</h2></label>
+            <input class="input" type="text" name="trigger">
+        </div>
+        <div class="mx-2" >
+            <label for=""><h2>Respuesta</h2></label>
+            <input class="input" type="text" name="reply" >
+        </div>
+        <div class="mt-5" >
+            <input type="submit" class="button">
+        </div>
+
+    </form>
+
+    {% for reply in replies_list %}
+    <div class="is-flex is-justify-content-space-between mt-2 " >
+        <div>
+            <h1 class="title" >
+                {{ reply.trigger }}
+            </h1>
+        </div>
+        <div>
+            <h1 class="" >
+                {{ reply.reply }}
+            </h1>
+        </div>
+        <div>
+            <a class="button is-link" href="">Editar</a> 
+            <a class="button is-danger" href="/autoreplies/remove/{{reply.id}}">Eliminar</a> 
+        </div>
+    </div>
+    {% endfor %}
+
+</section>
+
 {% endblock create %}

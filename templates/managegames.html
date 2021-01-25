@@ -1,0 +1,80 @@
+{% extends "dash.html" %}
+
+{% block create %}
+<section id="app" >
+
+<h1 class="title"> Administrar juegos</h1>
+
+<div  >
+    <form method="POST" action="" class=" is-flex pr-6 mr-6 " >
+        <input type="text" class="input mx-2" placeholder="Nombre del juego" name="game_title" >
+        <input type="submit" class="button mx-2 " value="Agregar nuevo juego"  >
+            
+    </form>
+</div>
+
+<div class="modal" v-bind:class="[isActive ? 'is-active' : '']" >
+    <div class="modal-background"></div>
+    <div class="modal-content">
+      <!-- Any other Bulma elements you want -->
+      <article class="message is-danger">
+        <div class="message-header">
+          <p>Cuidado</p>
+          <button class="delete" aria-label="delete" @click="toggleClass()"></button>
+        </div>
+        <div class="message-body is-flex is-justify-content-space-between is-align-items-center ">
+            <p>De verdad quieres eliminar este juego?</p>
+            <div>
+                <a href="" class="button" @click="toggleClass()" >Cancelar</a>
+                <a :href=`/remove/{% raw %}${workingId}{% endraw %}` class="button is-danger" >Eliminar</a>
+                
+            </div>
+        </div>
+      </article>
+    </div>
+    <button class="modal-close is-large" aria-label="close" @click="toggleClass()"></button>
+  </div>
+
+{% for game in games_list %}
+
+    <div class="is-flex is-align-items-center " >
+        <h1 class="is-size-3" >
+            {{ game.title }}
+            {{ game.id }}
+        </h1>
+        <div class="mx-2" >
+            <button class="button is-link" >Editar</button>
+        </div>
+        <div class="mx-2 " >
+            <button class="button is-danger" @click="toggleClass(); getWorkingId({{ game.id }})" >Eliminar</button>
+        </div> 
+
+    </div>
+
+{% endfor %}
+
+</section>
+
+{% endblock create %}
+{% block script %}
+<script>
+    console.log('Block script')
+    var app = new Vue({
+        el: '#app',
+        data: {
+            isActive: false,
+            workingId: ''
+
+        },
+        methods: {
+            toggleClass: function(){
+                this.isActive = !this.isActive
+            },
+            getWorkingId: function(id){
+                this.workingId = id
+                console.log(this.workingId)
+            }
+        }
+    })
+</script>
+{% endblock %}

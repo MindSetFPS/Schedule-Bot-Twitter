@@ -19,8 +19,8 @@
                         {% for game in games %}
                             <label class="radio">
                                 <span class="tag is-link is-light is-medium">
-                                    {{game}}
-                                    <input type="radio" name="game" value="{{game}}" >       
+                                    {{game.title}}
+                                    <input type="radio" name="game" value="{{game.title}}" >       
                                 </span>
                             </label>
                         {% endfor %}

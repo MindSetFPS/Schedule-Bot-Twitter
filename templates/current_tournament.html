@@ -2,7 +2,14 @@
 
 {% block create %}
 
-<h1 class="title"> Crear nuevo torneo</h1>
-<p> Hola </p>
+<h1 class="title"> Torneos en curso</h1>
+
+{% for tournament in tournaments %}
+<div class="card mt-3 p-2 " >
+    <h1 class="title">{{tournament.tournament_name}}</h1>
+    <p class="">{{tournament.game.title}}</p>
+</div>
+{% endfor %}
+
 
 {% endblock create %}
