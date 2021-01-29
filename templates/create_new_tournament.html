@@ -20,12 +20,21 @@
                             <label class="radio">
                                 <span class="tag is-link is-light is-medium">
                                     {{game.title}}
-                                    <input type="radio" name="game" value="{{game.title}}" >       
+                                    <input type="radio" name="game" value="{{game}}" >       
                                 </span>
                             </label>
                         {% endfor %}
                     </div>
 
+                </div>
+
+                <div class="columns mt-2" >
+                    <div class="column is-one-third" >
+                        <p class="title is-large" >Fecha de inicio </p>
+                    </div>
+                    <div class="column is-half" >
+                        <input class="input" type="date" placeholder="Nombre del torneo" name="beginingDate" >
+                    </div>
                 </div>
 
                 <div class="columns mt-2" >
@@ -148,7 +157,6 @@
             selectedDate: null,
             hourRepetition: '',
             gameDays: [],
-            uwu: 'chinguen a su madre traidores',
             0: new Date(),
             1: new Date(),
             Miercoles: '',

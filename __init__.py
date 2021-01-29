@@ -1,6 +1,8 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
+import time
+import threading
 
 db = SQLAlchemy()
 
@@ -31,6 +33,7 @@ def create_app():
     from .main import main as main_blueprint
     app.register_blueprint(main_blueprint)
 
+    #print(dir(app))    
     return app
 
 if __name__ == "__main__":

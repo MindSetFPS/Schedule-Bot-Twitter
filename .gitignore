@@ -1,4 +1,6 @@
 keys.txt
+keys.py
 db.sqlite
 /__pycache__
 /.vscode
+relationships.db
